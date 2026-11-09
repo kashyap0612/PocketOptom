@@ -1,0 +1,13 @@
+<resources>
+    <!-- Android 15+ draws apps behind the status bar by default ("edge-to-edge").
+         Opt out so the title bar and our layouts sit below it, like on older phones. -->
+    <style name="Theme.PocketOptom" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">#0B4F8A</item>
+        <item name="colorPrimaryVariant">#083A66</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#1E88E5</item>
+        <item name="colorSecondaryVariant">#1565C0</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+</resources>
