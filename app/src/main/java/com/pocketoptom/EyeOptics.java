@@ -50,7 +50,7 @@ public final class EyeOptics {
 
     /** logMAR → the familiar "6/x" Snellen notation. */
     public static String snellen(double logMar) {
-        if (logMar > 1.0 + 1e-6) return "worse than 6/60";
+        if (logMar > 1.0 + 1e-6) return "<6/60";
         long denominator = Math.round(6.0 * Math.pow(10, logMar));
         return "6/" + denominator;
     }

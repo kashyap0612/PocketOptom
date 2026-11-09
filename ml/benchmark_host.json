@@ -1,0 +1,17 @@
+{
+  "fp32": {
+    "size_mb": 8.875,
+    "accuracy": 0.9504,
+    "median_ms_host": 4.5
+  },
+  "fp16": {
+    "size_mb": 4.469,
+    "accuracy": 0.9421,
+    "median_ms_host": 2.52
+  },
+  "int8": {
+    "size_mb": 2.713,
+    "accuracy": 0.9504,
+    "median_ms_host": 1.23
+  }
+}

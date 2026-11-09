@@ -167,6 +167,7 @@
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="4dp"
+                    android:shrinkColumns="0"
                     android:stretchColumns="0" />
             </com.google.android.material.card.MaterialCardView>
 

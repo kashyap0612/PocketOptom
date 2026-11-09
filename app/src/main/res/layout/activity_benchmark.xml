@@ -82,7 +82,8 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="4dp"
-                android:stretchColumns="0" />
+                android:shrinkColumns="0"
+                    android:stretchColumns="0" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView

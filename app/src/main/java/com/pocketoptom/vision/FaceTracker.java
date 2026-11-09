@@ -24,7 +24,6 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.mediapipe.framework.image.BitmapExtractor;
 import com.google.mediapipe.framework.image.BitmapImageBuilder;
 import com.google.mediapipe.framework.image.MPImage;
 import com.google.mediapipe.tasks.components.containers.NormalizedLandmark;
@@ -36,6 +35,8 @@ import com.google.mediapipe.tasks.vision.facelandmarker.FaceLandmarkerResult;
 import com.pocketoptom.EyeOptics;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -182,15 +183,24 @@ public class FaceTracker {
         if (now <= lastTimestampMs) now = lastTimestampMs + 1;
         lastTimestampMs = now;
 
+        // Keep our own reference to this frame, keyed by its timestamp. The image MediaPipe hands
+        // back in onResult() is not reliable to crop from (it came back as garbled stripes),
+        // so we crop from the exact bitmap we sent in.
+        pendingFrames.put(now, upright);
         landmarker.detectAsync(new BitmapImageBuilder(upright).build(), now);
     }
+
+    /** Frames sent to MediaPipe that haven't had a result yet. */
+    private final Map<Long, Bitmap> pendingFrames = new ConcurrentHashMap<>();
 
     /** Called by MediaPipe on its own thread. */
     private void onResult(FaceLandmarkerResult result, MPImage input) {
         if (closed) return;
+        long ts = result.timestampMs();
+        Bitmap frame = pendingFrames.remove(ts);
+        pendingFrames.keySet().removeIf(t -> t < ts);   // drop frames MediaPipe skipped
         FaceMeasurement measurement = null;
-        if (!result.faceLandmarks().isEmpty()) {
-            Bitmap frame = BitmapExtractor.extract(input);
+        if (frame != null && !result.faceLandmarks().isEmpty()) {
             measurement = measure(result.faceLandmarks().get(0), frame);
         }
         final FaceMeasurement m = measurement;
