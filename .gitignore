@@ -13,3 +13,4 @@ ml/data/
 ml/out/
 __pycache__/
 *.pyc
+ml/.venv/

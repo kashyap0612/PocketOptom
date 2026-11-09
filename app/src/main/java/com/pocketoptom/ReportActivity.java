@@ -1,8 +1,11 @@
 package com.pocketoptom;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,12 +21,18 @@ public class ReportActivity extends AppCompatActivity {
         TextView reportText = findViewById(R.id.reportText);
         reportText.setText(report);
 
+        // Opens an email draft (Gmail etc.) with the report filled in.
+        // "mailto:" makes Android offer only email apps.
         findViewById(R.id.shareButton).setOnClickListener(v -> {
-            Intent send = new Intent(Intent.ACTION_SEND);
-            send.setType("text/plain");
-            send.putExtra(Intent.EXTRA_SUBJECT, "Eye screening report");
-            send.putExtra(Intent.EXTRA_TEXT, report);
-            startActivity(Intent.createChooser(send, "Share report"));
+            Intent email = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
+            email.putExtra(Intent.EXTRA_SUBJECT, "Eye screening report"
+                    + (Session.customerName.isEmpty() ? "" : " – " + Session.customerName));
+            email.putExtra(Intent.EXTRA_TEXT, report);
+            try {
+                startActivity(email);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(this, "No email app found", Toast.LENGTH_SHORT).show();
+            }
         });
 
         findViewById(R.id.newCustomerButton).setOnClickListener(v -> {

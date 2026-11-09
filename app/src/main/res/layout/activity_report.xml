@@ -23,7 +23,7 @@
         android:id="@+id/shareButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Share report" />
+        android:text="Email report" />
 
     <Button
         android:id="@+id/newCustomerButton"

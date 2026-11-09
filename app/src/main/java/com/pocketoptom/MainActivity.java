@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (getSupportActionBar() != null) getSupportActionBar().hide();   // the layout has its own big title
 
         nameInput = findViewById(R.id.nameInput);
         ageInput = findViewById(R.id.ageInput);
