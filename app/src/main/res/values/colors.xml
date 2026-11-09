@@ -1,0 +1,15 @@
+<resources>
+    <color name="brand">#0B4F8A</color>
+    <color name="brand_dark">#083A66</color>
+    <color name="brand_light">#E8F1FA</color>
+    <color name="accent">#00A3A3</color>
+    <color name="bg">#F4F7FB</color>
+    <color name="card">#FFFFFF</color>
+    <color name="text_primary">#1A2433</color>
+    <color name="text_secondary">#5B6B7F</color>
+    <color name="divider">#E3E8EF</color>
+    <color name="ok">#1E8E5A</color>
+    <color name="ok_bg">#E6F5EE</color>
+    <color name="warn">#B26A00</color>
+    <color name="warn_bg">#FFF4E0</color>
+</resources>

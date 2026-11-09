@@ -1,101 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PocketOptom"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Offline eye screening on any Android phone"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/nameInput"
+        <!-- ===== Hero header ===== -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Customer name"
-            android:inputType="textPersonName" />
+            android:background="@drawable/header_bg"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingTop="36dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="28dp">
 
-        <EditText
-            android:id="@+id/ageInput"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👁  PocketOptom"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Eye screening on any phone.\nNo equipment. No internet."
+                android:textColor="#D9FFFFFF"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView style="@style/HeroChip" android:text="100% offline" />
+                <TextView style="@style/HeroChip" android:text="On-device AI" />
+                <TextView
+                    android:id="@+id/modelChip"
+                    style="@style/HeroChip"
+                    android:text="INT8 model" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Age"
-            android:inputType="number" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <EditText
-            android:id="@+id/screenHoursInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Screen time per day (hours)"
-            android:inputType="number" />
+            <!-- ===== Customer ===== -->
+            <TextView style="@style/SectionLabel" android:text="Customer" />
 
-        <CheckBox
-            android:id="@+id/nightDrivingInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Drives at night" />
+            <com.google.android.material.card.MaterialCardView style="@style/Card">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-        <Button
-            android:id="@+id/pdButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="1 · Measure pupillary distance" />
+                    <EditText
+                        android:id="@+id/nameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Customer name"
+                        android:inputType="textPersonName|textCapWords" />
 
-        <Button
-            android:id="@+id/acuityButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2 · Vision test" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/eyeScreenButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="3 · Eye health screen" />
+                        <EditText
+                            android:id="@+id/ageInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Age"
+                            android:inputType="number"
+                            android:maxLength="3" />
 
-        <Button
-            android:id="@+id/reportButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="4 · Report &amp; recommendation" />
+                        <EditText
+                            android:id="@+id/screenHoursInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:hint="Screen hrs/day"
+                            android:inputType="number"
+                            android:maxLength="2" />
+                    </LinearLayout>
 
-        <TextView
-            android:id="@+id/statusText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:lineSpacingExtra="4dp"
-            android:textSize="15sp" />
+                    <CheckBox
+                        android:id="@+id/nightDrivingInput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Drives at night" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <Button
-            android:id="@+id/benchmarkButton"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="On-device model benchmark (FP32 / FP16 / INT8)" />
+            <!-- ===== Steps ===== -->
+            <TextView style="@style/SectionLabel" android:text="Screening steps" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Screening aid only — not a medical diagnosis. Everything runs on this phone; no data leaves the device."
-            android:textSize="12sp" />
+            <com.google.android.material.card.MaterialCardView android:id="@+id/pdCard" style="@style/Card">
+                <LinearLayout style="@style/StepRow">
+                    <TextView style="@style/StepBadge" android:text="1" />
+                    <LinearLayout style="@style/StepTexts">
+                        <TextView style="@style/StepTitle" android:text="Pupillary distance" />
+                        <TextView style="@style/StepSubtitle" android:text="Selfie camera · iris as a ruler" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/pdStatus" style="@style/StepStatus" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView android:id="@+id/acuityCard" style="@style/Card">
+                <LinearLayout style="@style/StepRow">
+                    <TextView style="@style/StepBadge" android:text="2" />
+                    <LinearLayout style="@style/StepTexts">
+                        <TextView style="@style/StepTitle" android:text="Vision test" />
+                        <TextView style="@style/StepSubtitle" android:text="Tumbling E · sized to your distance" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/acuityStatus" style="@style/StepStatus" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView android:id="@+id/eyeScreenCard" style="@style/Card">
+                <LinearLayout style="@style/StepRow">
+                    <TextView style="@style/StepBadge" android:text="3" />
+                    <LinearLayout style="@style/StepTexts">
+                        <TextView style="@style/StepTitle" android:text="Eye health screen" />
+                        <TextView style="@style/StepSubtitle" android:text="Quantised AI model on the phone" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/eyeStatus" style="@style/StepStatus" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView android:id="@+id/reportCard" style="@style/Card">
+                <LinearLayout style="@style/StepRow">
+                    <TextView style="@style/StepBadge" android:text="4" />
+                    <LinearLayout style="@style/StepTexts">
+                        <TextView style="@style/StepTitle" android:text="Report &amp; advice" />
+                        <TextView style="@style/StepSubtitle" android:text="Lens tips · referral · email" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/reportStatus" style="@style/StepStatus" android:text="Open ›" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ===== Results so far ===== -->
+            <TextView style="@style/SectionLabel" android:text="Results" />
+
+            <com.google.android.material.card.MaterialCardView style="@style/Card">
+                <TableLayout
+                    android:id="@+id/resultsTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="4dp"
+                    android:stretchColumns="0" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ===== Benchmark ===== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/benchmarkCard"
+                style="@style/Card"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/brand_light"
+                app:strokeColor="@color/brand"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚡ On-device AI benchmark"
+                        android:textColor="@color/brand"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="FP32 vs FP16 vs INT8 on this phone's CPU, NNAPI and GPU"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="Screening aid only — not a medical diagnosis.\nEverything runs on this phone; no data leaves the device."
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

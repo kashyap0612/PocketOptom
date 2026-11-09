@@ -1,39 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:background="@color/bg">
 
-    <TextView
-        android:id="@+id/deviceText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/runButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Run benchmark" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantisation, measured on this phone"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <HorizontalScrollView
+        <TextView
+            android:id="@+id/deviceText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
 
-            <TextView
-                android:id="@+id/resultText"
-                android:layout_width="wrap_content"
+        <!-- Headline result -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/headlineCard"
+            style="@style/Card"
+            android:layout_marginTop="14dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/brand">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:textIsSelectable="true"
-                android:textSize="12sp" />
-        </HorizontalScrollView>
-    </ScrollView>
-</LinearLayout>
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <LinearLayout style="@style/StepTexts" android:layout_marginStart="0dp" android:gravity="center_horizontal">
+                    <TextView android:id="@+id/smallerValue" style="@style/BigNumber" />
+                    <TextView style="@style/BigNumberLabel" android:text="smaller" />
+                </LinearLayout>
+                <LinearLayout style="@style/StepTexts" android:layout_marginStart="0dp" android:gravity="center_horizontal">
+                    <TextView android:id="@+id/fasterValue" style="@style/BigNumber" />
+                    <TextView style="@style/BigNumberLabel" android:text="faster" />
+                </LinearLayout>
+                <LinearLayout style="@style/StepTexts" android:layout_marginStart="0dp" android:gravity="center_horizontal">
+                    <TextView android:id="@+id/agreeValue" style="@style/BigNumber" />
+                    <TextView style="@style/BigNumberLabel" android:text="same answers" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/headlineText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/runButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Run benchmark" />
+
+        <TextView style="@style/SectionLabel" android:text="All variants" />
+
+        <com.google.android.material.card.MaterialCardView style="@style/Card">
+            <TableLayout
+                android:id="@+id/benchTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="4dp"
+                android:stretchColumns="0" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Each row: 5 warm-up + 50 timed runs on 16 images. “Agree” = same top answer as FP32 on CPU."
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>

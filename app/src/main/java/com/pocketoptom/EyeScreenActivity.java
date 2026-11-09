@@ -16,6 +16,9 @@ import com.pocketoptom.ml.TfliteClassifier;
 import com.pocketoptom.vision.FaceMeasurement;
 import com.pocketoptom.vision.FaceTracker;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -115,6 +118,8 @@ public class EyeScreenActivity extends AppCompatActivity implements FaceTracker.
         captureButton.setEnabled(false);
 
         modelExecutor.execute(() -> {
+            saveCrop(right, "R");
+            saveCrop(left, "L");
             long start = System.nanoTime();
             TfliteClassifier.Prediction r = classifier.classify(right);
             TfliteClassifier.Prediction l = classifier.classify(left);
@@ -136,6 +141,22 @@ public class EyeScreenActivity extends AppCompatActivity implements FaceTracker.
                 saveButton.setEnabled(true);
             });
         });
+    }
+
+    /**
+     * Keeps a copy of what the model saw, in the app's private storage (files/eye_crops/).
+     * Useful for debugging and for collecting real phone photos to improve the model.
+     * Read them with: adb exec-out run-as com.pocketoptom ls files/eye_crops
+     */
+    private void saveCrop(Bitmap crop, String eye) {
+        File dir = new File(getFilesDir(), "eye_crops");
+        if (!dir.exists() && !dir.mkdirs()) return;
+        File file = new File(dir, System.currentTimeMillis() + "_" + eye + ".jpg");
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            crop.compress(Bitmap.CompressFormat.JPEG, 95, out);
+        } catch (IOException ignored) {
+            // debugging aid only — never block the screening
+        }
     }
 
     /** 1 − P(normal) if the model has a "normal" class, else −1 (unknown). */

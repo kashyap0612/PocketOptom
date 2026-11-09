@@ -33,8 +33,9 @@ def load_datasets(data_dir: pathlib.Path, batch: int):
     train = tf.keras.utils.image_dataset_from_directory(
         data_dir / "train", image_size=(IMG, IMG), batch_size=batch, label_mode="int",
         shuffle=True, seed=42)
+    val_dir = data_dir / "val" if (data_dir / "val").exists() else data_dir / "test"
     val = tf.keras.utils.image_dataset_from_directory(
-        data_dir / "val", image_size=(IMG, IMG), batch_size=batch, label_mode="int",
+        val_dir, image_size=(IMG, IMG), batch_size=batch, label_mode="int",
         shuffle=False)
     return train, val
 
