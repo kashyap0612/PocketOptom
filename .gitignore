@@ -1,0 +1,15 @@
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+captures/
+.cxx/
+# Downloaded automatically by the build (see app/build.gradle)
+app/src/main/assets/face_landmarker.task
+# Training data and outputs
+ml/data/
+ml/out/
+__pycache__/
+*.pyc
